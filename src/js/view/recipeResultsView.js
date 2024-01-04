@@ -1,7 +1,5 @@
-import icons from "url:../../img/icons.svg";
 import {generateHTML} from "./previewView";
 import View from "./view";
-import {state} from "../model";
 
 class RecipeResultsView extends View {
   parentElement = document.querySelector(".results");
@@ -15,8 +13,6 @@ class RecipeResultsView extends View {
   }
 
   generateHTML(data) {
-    console.log(data);
-    console.log(state);
     return generateHTML(data);
   }
 }

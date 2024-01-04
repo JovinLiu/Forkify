@@ -98,3 +98,8 @@ export function formatNewRecipe(rawNewRecipe) {
   });
   return newRecipe;
 }
+
+export function cleanBookmarks() {
+  state.bookMarks = [];
+  localStorage.clear();
+}

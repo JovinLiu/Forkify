@@ -54,3 +54,26 @@ export async function searchRecipeResults(newRecipe = undefined) {
     throw err;
   }
 }
+
+export async function deleteUserRecipe(id) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    const res = await fetch(`${API_URL}/${id}?key=${KEY}`, options);
+    console.log(res.ok);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function deleteAllUserREcipes() {
+  state.bookMarks.forEach((result) => {
+    const id = result.id;
+    deleteUserRecipe(id);
+    window.history.pushState(null, "", `#`);
+  });
+}
