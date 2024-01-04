@@ -1,7 +1,6 @@
 import icons from "url:../../img/icons.svg";
 
 export default class View {
-  data;
   cleanContainer() {
     this.parentElement.innerHTML = "";
   }
@@ -30,5 +29,33 @@ export default class View {
       if (!newEl.isEqualNode(oldEl) && newEl.firstChild?.nodeValue.trim() !== "") oldEl.textContent = newEl.textContent;
       if (!newEl.isEqualNode(oldEl)) Array.from(newEl.attributes).forEach((attr) => oldEl.setAttribute(attr.name, attr.value));
     });
+  }
+
+  renderError(err) {
+    this.cleanContainer();
+    const html = ` 
+                  <div class="message">
+                  <div>
+                      <svg>
+                      <use href="${icons}#icon-smile"></use>
+                      </svg>
+                  </div>
+                  <p>${String(err).length > 5 ? String(err) : this.error}</p>
+                  </div>`;
+    this.parentElement.insertAdjacentHTML("afterbegin", html);
+  }
+
+  renderMessage() {
+    this.cleanContainer();
+    const html = ` 
+                  <div class="message">
+                  <div>
+                      <svg>
+                      <use href="${icons}#icon-smile"></use>
+                      </svg>
+                  </div>
+                  <p>${this.message}</p>
+                  </div>`;
+    this.parentElement.insertAdjacentHTML("afterbegin", html);
   }
 }

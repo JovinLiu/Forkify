@@ -26,6 +26,7 @@ class PaginationView extends View {
     if (page === pageMax && pageMax > 1) {
       return this.generateBtnHTML(page - 1, page);
     }
+    return "";
   }
 
   generateBtnHTML(actionPage, page) {

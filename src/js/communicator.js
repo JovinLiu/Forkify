@@ -10,36 +10,47 @@
 // const id = `5ed6604591c37cdc054bc886`;
 // const API_URL = `https://forkify-api.herokuapp.com/api/v2/recipes/`;
 import {state} from "./model";
-import {API_URL} from "./config";
+import {API_URL, FETCH_TIME_OUT, KEY} from "./config";
 import {getKeyWord} from "./view/searchBarView";
 
-const timeout = function (s) {
+function timeout(s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
       reject(new Error(`Request took too long! Timeout after ${s} second`));
     }, s * 1000);
   });
-};
+}
 
 export async function searchRecipe(id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`);
+    const request = fetch(`${API_URL}/${id}`);
+    const res = await Promise.race([request, timeout(FETCH_TIME_OUT)]);
     if (!res.ok) throw new Error("Fail to fatch the information from API");
     const rawData = await res.json();
     return rawData;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 }
 
-export async function searchRecipeResults() {
+export async function searchRecipeResults(newRecipe = undefined) {
   try {
     getKeyWord();
-    const res = await fetch(`${API_URL}?search=${state.search.keyWord}`);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newRecipe)
+    };
+    if (!state.search.keyWord && !newRecipe) throw new Error("Empty input! Please try a valid keyword! :)");
+    const request = newRecipe ? fetch(`${API_URL}?key=${KEY}`, options) : fetch(`${API_URL}?search=${state.search.keyWord}&key=${KEY}`);
+    const res = await Promise.race([request, timeout(FETCH_TIME_OUT)]);
     if (!res.ok) throw new Error("Fail to fatch the information from API");
     const results = await res.json();
+    if (results.results === 0) throw new Error(`No recipes found. try another keyword for searching :)`);
     return results;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 }
