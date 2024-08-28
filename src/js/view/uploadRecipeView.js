@@ -34,6 +34,7 @@ class UploadRecipeView extends View {
   uploadRecipe(handler) {
     this.btnUpload.addEventListener("click", function (e) {
       e.preventDefault();
+      console.log(e.target);
       const data = new FormData(this.form);
       let rawNewRecipe = {};
       for (let [key, value] of data) {

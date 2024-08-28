@@ -78,7 +78,9 @@ async function controlUploadRecipe(rawNewRecipe) {
       if (!Array.from(uploadRecipeView.addRecipeWindow.classList).includes("hidden")) {
         uploadRecipeView.toggleWindow();
       }
-      setTimeout(() => uploadRecipeView.render(), 1000);
+      setTimeout(() => {
+        uploadRecipeView.render();
+      }, 1000);
     }, AUTO_CLOSE_WINDOW_SEC * 1000);
   } catch (err) {
     uploadRecipeView.renderError(err);
