@@ -36,6 +36,7 @@ export async function searchRecipe(id) {
 export async function searchRecipeResults(newRecipe = undefined) {
   try {
     getKeyWord();
+
     const options = {
       method: "POST",
       headers: {

@@ -8,6 +8,8 @@ import {searchRecipeResults} from "./communicator";
 import {AUTO_CLOSE_WINDOW_SEC} from "./config";
 import {deleteAllUserREcipes} from "./communicator";
 
+// RecipeResultsView
+
 (function init() {
   loadLocalBookmarks();
   recipeView.loadRecipe(controlRecipeView);

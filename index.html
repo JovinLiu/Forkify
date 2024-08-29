@@ -17,8 +17,8 @@
     <div class="container">
       <header class="header">
         <img src="src/img/logo.png" alt="Logo" class="header__logo" />
-        <form class="search">
-          <input type="text" class="search__field" placeholder="Search over 1,000,000 recipes..." />
+        <form class="search" onsubmit="(e)=>e.preventDefault">
+          <input type="text" class="search__field" name="search" placeholder="Search over 1,000,000 recipes..." />
           <button class="btn search__btn">
             <svg class="search__icon">
               <use href="src/img/icons.svg#icon-search"></use>
@@ -55,10 +55,7 @@
       <div class="search-results">
         <ul class="results"></ul>
         <div class="pagination"></div>
-        <p class="copyright">
-          &copy; Copyright by
-          <a class="twitter-link" target="_blank" href="">Jovin Liu</a>. Use for learning or your portfolio. Don't use to teach. Don't claim as your own.
-        </p>
+        <p class="copyright">This project is coded by Jovin Liu for learning and presenting purposes.</p>
       </div>
 
       <div class="recipe">
